@@ -1,1 +1,8 @@
 python manage.py runserver
+
+python manage.py makemigrations
+python manage.py migrate
+
+pip freeze > requirements.txt # manter atualizado dependencias do projeto
+pip install -r requirements.txt
+pip install  --requirement requirements.txt
