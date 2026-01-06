@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v7!3)p9u$y(!wd0wa#mvs9s7p7!_v(gf&vvd%rrp11#exmj#7q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # DEBUG com valor True = modo desenvolvimento
+DEBUG = False # DEBUG com valor True = modo desenvolvimento
 #DEBUG com valor False = modo produção
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*'] # endreço http da internet para produção
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
