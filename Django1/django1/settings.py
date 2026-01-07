@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-v7!3)p9u$y(!wd0wa#mvs9s7p7!_v(gf&vvd%rrp11#exmj#7q
 DEBUG = False # DEBUG com valor True = modo desenvolvimento
 #DEBUG com valor False = modo produção
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-ALLOWED_HOSTS = ['*'] # endreço http da internet para produção
+ALLOWED_HOSTS = ['*'] # endreço http da internet para produção o dominio fica no lugar do *
 
 
 # Application definition

@@ -13,3 +13,8 @@ pip install -r requirements.txt
 pip install  --requirement requirements.txt
 
 para trabalhar com arquivos estaticos em produção pip install whitenoise   gunicorn é um servidor 
+
+depois do login 
+heroku create django1-pi --buildpack heroku/python
+git push heroku master #para publicar app
+
