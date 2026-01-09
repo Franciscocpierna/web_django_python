@@ -25,7 +25,9 @@ O comando principal para gerar a estrutura base do site:
 django-admin startproject nome_do_projeto .
 
 criando app
-python manage.py startapp nome_da_app
+as duas linhas abaixo cria app, só use uma linha
+#python manage.py startapp nome_da_app
+django-admin startapp nome_da_app
 
 5. Executar as Migrações Iniciais
 
@@ -42,3 +44,10 @@ Criar um Superutilizador (Admin)
 Para aceder à interface de administração (/admin)
 
 python manage.py createsuperuser
+
+instalando para projeto 2
+pip install django whitenoise gunicorn django-bootstrap4 PyMysql django-stdimage
+django-admin startproject django2 .
+criando app core
+#python manage.py startapp core vou usar linha debaixo as duas cria app
+django-admin startapp core
