@@ -18,3 +18,27 @@ depois do login
 heroku create django1-pi --buildpack heroku/python
 git push heroku master #para publicar app
 
+. Criar o Projeto django
+
+O comando principal para gerar a estrutura base do site:
+
+django-admin startproject nome_do_projeto .
+
+criando app
+python manage.py startapp nome_da_app
+
+5. Executar as Migrações Iniciais
+
+Cria as tabelas de base de dados necessárias para o sistema de administração e utilizadores:
+
+python manage.py migrate
+
+iniciar servidor 
+python manage.py runserver
+
+
+Criar um Superutilizador (Admin)
+
+Para aceder à interface de administração (/admin)
+
+python manage.py createsuperuser
