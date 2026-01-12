@@ -1,0 +1,10 @@
+se vc tiver no /ubuntu
+
+sudo apt-get install libmsqlclient-dev python3-dev
+
+se vc tiver no Mac 
+
+brew install mysql-connector.c 
+
+se vc tiver no windows, e tem servidor MySQL instalado, as biblipotecas já devem estar instaladas.
+
