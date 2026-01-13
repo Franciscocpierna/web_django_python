@@ -37,7 +37,9 @@ python manage.py migrate
 
 iniciar servidor 
 python manage.py runserver
-
+ 
+usar o shell
+python manage.py shell
 
 Criar um Superutilizador (Admin)
 
