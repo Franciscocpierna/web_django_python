@@ -1,36 +1,25 @@
-<!--{% load static %}-->
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produto</title>
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    {% bootstrap_css %}
 </head>
 <body>
-  <h1>Produto</h1>
-<!--    
-    <table>
-        <thead>
-           <tr>
-              <th>Produto</th>
-              <th>Preço</th>
-              <th>Estoque</th> 
-  
-           </tr>
-        </thead> 
-        <tbody> 
-          
-              <tr>
-               <td><a href="{% url 'index' %}">{{ produto.nome }}</a></td> 
-               <td>{{ produto.nome }} </td> 
-               <td>{{ produto.preco }}</td>
-               <td>{{ produto.estoque }}</td>   
-             </tr>
-          
-        </tbody>   
-      </table>
-    -->
+    <div class="container">
+        <h1>Produto</h1>
+        {% bootstrap_messages %}
+
+        <form action="{% url 'produto' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% bootstrap_javascript jquery='full' %}
 </body>
 </html>

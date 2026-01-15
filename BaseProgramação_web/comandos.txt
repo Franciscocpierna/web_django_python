@@ -1,7 +1,7 @@
 python manage.py runserver
 
-python manage.py makemigrations
-python manage.py migrate
+python manage.py makemigrations # toda vez que criamos modelo executamos esse comando
+python manage.py migrate # realiza a migração
 
 #usuario e senha comando
 python manage.py createsuperuser
