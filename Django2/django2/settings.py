@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sa$vtu192tq%3%-z@1_iy#(8=%d10kapw)81ug&f$_$1oudiin'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True #DEBUG = FALSE PARA PUBLICAR NA INTERNET NO DOMINIO
 
 ALLOWED_HOSTS = ['*']
 
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware', DESCOMENTA PARA PUBLICAR NO DOMINIO
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -131,7 +131,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #configurações de e-mail
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' COMENTE PARA PUBLICAR NO DOMINIO
 #caso onde é publicado tem servidor de email configurações
 """
   EMAIL_HOST = 'localhost'
