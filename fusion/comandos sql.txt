@@ -1,0 +1,95 @@
+
+
+
+conexao = mysql.connector.connect(
+    host="localhost",
+    user="root",      # Ou o user que criaste
+    password="",      # A tua senha do MySQL
+    database="projeto_erp" # O nome exato que deste no comando CREATE DATABASE
+)
+
+CREATE DATABASE IF NOT EXISTS python;
+**Dica:** Se o sistema der erro de "Table doesn't exist", certifica-te de que o nome da tabela no Python é exatamente `clientes` (ou o nome que definiste no `CREATE TABLE`). O SQL diferencia letras maiúsculas e minúsculas dependendo da configuração do sistema.
+
+CREATE TABLE python.cliente (
+id INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(50) NOT NULL,
+telefone VARCHAR(50) NULL,
+cidade VARCHAR(50) NULL, -- Removi a vírgula que estava aqui
+PRIMARY KEY (IdCliente)         -- A chave primária deve ficar dentro dos parênteses
+);
+
+INSERT INTO cliente (nome, telefone, cidade)
+VALUES ('João Silva', '11999998888', 'São Paulo');
+
+INSERT INTO cliente (nome) 
+VALUES ('Jorge');
+
+INSERT INTO cliente (nome, telefone, cidade) 
+VALUES ('Jorge', NULL, NULL);
+
+### Variaveis ###
+cliente = 'jessica'
+telefone = '8789797'
+cidade = 'São Paulo'
+
+sql = "INSERT INTO cliente (Nome, Telefone, Cidade) values (%s,  %s, %s)"
+val = (cliente, telefone, cidade)
+mycursor.execute(sql, val)
+
+cosultar todos   
+select * from cliente
+
+SELECT * FROM cliente WHERE nome = 'Jorge';
+SELECT * FROM cliente WHERE cidade LIKE 'S%'; # traz todos que começam com S
+
+#Alteração
+
+UPDATE cliente
+SET telefone = '11976314168',
+cidade = 'Guarulhos'
+WHERE nome = 'Jorge' #ou IdCliente = do jorge
+
+UPDATE cliente
+SET nome ='João Silva', 
+telefone = '11976314168',
+cidade = 'São Paulo'
+WHERE IdCliente = 1 
+
+### Variaveis ###
+cidade = 'Rio de Janeiro'
+idCliente = '2'
+
+### UPDATE TABELA ###
+print('UPDATE CLIENTE')
+sql = "UPDATE cliente SET Cidade = %s WHERE  IdCliente = %s"
+val = (cidade, idCliente)
+mycursor.execute(sql, val)
+
+
+
+deletar
+DELETE FROM cliente WHERE IdCliente = 1;
+
+
+criar um campo novo depois da tabela criada
+ALTER TABLE python.cliente ADD COLUMN email VARCHAR(100);
+
+modificar a estrutura de um campo
+ALTER TABLE produtos MODIFY COLUMN preco DECIMAL(10,2) NOT NULL;
+ALTER TABLE clientesMODIFY COLUMN telefone VARCHAR(20);
+
+renomeia nome do campo
+ALTER TABLE nome_da_tabela RENAME COLUMN nome_antigo TO nome_novo;
+ALTER TABLE cliente RENAME COLUMN id TO IdCliente;
+
+em caso de não acesso vc deve acessar o superusuario 
+root e sua senha que pode ter acesso a tudo
+
+e dar a qualquer usuario acesso 
+GRANT ALL PRIVILEGES ON *.* TO 'pierna'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+MySQL Workbench
+
+psql -U postgres para entrar
