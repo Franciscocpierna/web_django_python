@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 #from .models import Servico, Funcionario
 #from .forms import ContatoForm
 
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
