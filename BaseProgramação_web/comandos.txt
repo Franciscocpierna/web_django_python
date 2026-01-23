@@ -53,3 +53,8 @@ django-admin startproject django2 .
 criando app core
 #python manage.py startapp core vou usar linha debaixo as duas cria app
 django-admin startapp core
+
+
+depois de criar o model rodar
+python manage.py makemigrations e depois a linha abaixo
+python manage.py migrate cria todas as tabelas
