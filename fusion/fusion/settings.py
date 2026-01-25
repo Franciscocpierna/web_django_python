@@ -1,23 +1,30 @@
 import os
 from pathlib import Path
+import dj_database-url # import para produção
 
 # Caminho base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Configurações de Segurança
 SECRET_KEY = 'django-insecure-mude-esta-chave-antes-de-ir-para-producao'
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+#DEBUG = True #desenvolvimento
+DEBUG = False #produção
+ALLOWED_HOSTS = ['*'] 
 
 # Definição das Aplicações
 INSTALLED_APPS = [
+     'core',
+
+    'django_adminlte',
+    'django_adminlte_theme',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    
 ]
 
 # Middlewares
@@ -53,7 +60,7 @@ TEMPLATES = [
 ]
 
 # Base de Dados (SQLite)
-
+""" usado durante desenvolvimento
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -64,6 +71,13 @@ DATABASES = {
         'PORT': '5432', 
     }
 }
+"""
+DATABASES = {  #produção
+    'default': 'default': dj_database_url.config()
+}
+
+
+
 # Validação de Senhas
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -79,18 +93,18 @@ USE_I18N = True
 USE_TZ = True
 
 # Ficheiros Estáticos e de Media
-STATIC_URL = 'static/'
+STATIC_URL = '/static/' #no desenvolvimento estava STATIC_URL = 'static/'
 #STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATICFILES_DIRS = [BASE_DIR / 'static']
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/' # no desenvolvimento estava MEDIA_URL = 'media/'
 #MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Configuração de ID padrão
 #DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email teste console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #desenvolvimento
 
 """
 # Email produção
