@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import dj_database-url # import para produção
+import dj_database_url # import para produção
 
 # Caminho base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Configurações de Segurança
 SECRET_KEY = 'django-insecure-mude-esta-chave-antes-de-ir-para-producao'
 #DEBUG = True #desenvolvimento
-DEBUG = False #produção
+DEBUG = True 
 ALLOWED_HOSTS = ['*'] 
 
 # Definição das Aplicações
@@ -60,7 +60,7 @@ TEMPLATES = [
 ]
 
 # Base de Dados (SQLite)
-""" usado durante desenvolvimento
+#usado durante desenvolvimento
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -71,10 +71,11 @@ DATABASES = {
         'PORT': '5432', 
     }
 }
-"""
-DATABASES = {  #produção
-    'default': 'default': dj_database_url.config()
-}
+
+'''DATABASES = {  #produção
+    'default': dj_database_url.config()
+    
+}'''
 
 
 
@@ -104,7 +105,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Configuração de ID padrão
 #DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email teste console
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #desenvolvimento
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #desenvolvimento
 
 """
 # Email produção
