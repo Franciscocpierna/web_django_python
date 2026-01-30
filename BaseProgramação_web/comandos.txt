@@ -1,10 +1,22 @@
+-- Active: 1768913406748@@127.0.0.1@5432@fusion
 python manage.py runserver
 
 python manage.py makemigrations # toda vez que criamos modelo executamos esse comando
 python manage.py migrate # realiza a migração
 
+
+from django.contrib.auth.models import User
 #usuario e senha comando
 python manage.py createsuperuser
+is_staff = true  e is_superuser = true se  for cretesupperuser
+is_staff = true  e is_superuser = false se for membro da equipe  User.objects.create_user(username = 'teste', password = '123456', email = 'teste@gmail.com')
+is_staff = false  e is_superuser=false se não for membro da equipe User.objects.create_user(username = 'teste', password = '123456', email = 'teste@gmail.com')
+User.objects.create_user(
+    username='teste1', 
+    password='1234567', 
+    email='teste1@gmail.com', 
+    is_staff=True
+)
 python manage.py collectstatic #usado quando DEBUG=False
 
 
