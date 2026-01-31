@@ -2,7 +2,7 @@
 python manage.py runserver
 
 python manage.py makemigrations # toda vez que criamos modelo executamos esse comando
-python manage.py migrate # realiza a migração
+python manage.py migrate # realiza a migração cria tabelas
 
 
 from django.contrib.auth.models import User
@@ -39,7 +39,7 @@ django-admin startproject nome_do_projeto .
 criando app
 as duas linhas abaixo cria app, só use uma linha
 #python manage.py startapp nome_da_app
-django-admin startapp nome_da_app
+django-admin startapp core
 
 5. Executar as Migrações Iniciais
 
