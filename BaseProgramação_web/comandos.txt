@@ -70,3 +70,7 @@ django-admin startapp core
 depois de criar o model rodar
 python manage.py makemigrations e depois a linha abaixo
 python manage.py migrate cria todas as tabelas
+
+instalação do django
+pip uninstall django
+pip install django==4.2.*
