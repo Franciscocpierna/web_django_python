@@ -8,7 +8,11 @@
             <div class="alert alert-primary" role="alert">
                 Seja bem-vindo(a) {{ user.get_full_name }}!
             </div>
-            <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+          <!---  <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a> substituido por esse form abaixo versão mais recente do django--->
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
         {% endif %}
     </div>
 {% endblock %}
