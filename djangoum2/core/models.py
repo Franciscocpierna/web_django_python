@@ -9,3 +9,26 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+'''usado no python console
+   from textblob import TextBlob
+   from deep_translator import GoogleTranslator
+   #texto = TextBlob('evolua seu lado geek')
+   #texto.translate(to='es')
+   texto_original = 'Evolua seu lado geek'
+   print(f"Original (PT): {texto_original}")
+   traducao_bruta = GoogleTranslator(source='pt', target='en').translate(texto_original)
+   texto_espanhol = TextBlob(traducao_bruta)
+   print(f"Traduzido (ES): {texto_espanhol}")
+
+
+   usando pip install translate
+   from translate import Translator  
+   translator = Translator(to_lang="en")  
+   translation = translator.translate("Estou estudando Django na Geek University")  
+   print(translation)
+Estou estudando Django na Geek University
+'''
+
+
