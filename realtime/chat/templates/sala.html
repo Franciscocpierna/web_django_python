@@ -1,0 +1,98 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Geek Chat - {{ nome_sala }}</title>
+    {% bootstrap_css %}
+    <style>
+        #sala {
+            resize: none;
+            background-color: #f8f9fa;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">Sala: <strong>{{ nome_sala }}</strong></div>
+            <div class="card-body">
+                <!-- Adicionei form-control para o Bootstrap estilizar -->
+                <textarea id="sala" class="form-control mb-3" cols="70" rows="15" readonly></textarea>
+                
+                <div class="input-group">
+                    <input id="texto" type="text" class="form-control" placeholder="Digite sua mensagem..." />
+                    <div class="input-group-append">
+                        <button id="botao" class="btn btn-primary" type="button">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forma segura de passar dados do Django para o JS (Colocado antes do script) -->
+    {{ nome_sala|json_script:"nome-sala-data" }}
+
+    {% bootstrap_javascript jquery='full' %}
+    
+    <script>
+        // Recupera o elemento de dados
+        const salaDataElement = document.getElementById('nome-sala-data');
+        
+        if (salaDataElement) {
+            // Recupera o nome da sala de forma segura
+            const nome_sala = JSON.parse(salaDataElement.textContent);
+
+            // Detecta se usa ws:// ou wss:// (segurança)
+            const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+            const chatSocket = new WebSocket(
+                ws_scheme + '://' + window.location.host + '/ws/chat/' + nome_sala + '/'
+            );
+
+            chatSocket.onmessage = function(e) {
+                const dados = JSON.parse(e.data);
+                const mensagem = dados['mensagem'];
+                const chatLog = document.querySelector('#sala');
+                if (chatLog) {
+                    chatLog.value += (mensagem + '\n');
+                    // Auto-scroll para o fim do chat
+                    chatLog.scrollTop = chatLog.scrollHeight;
+                }
+            };
+
+            chatSocket.onclose = function(e) {
+                console.error('O chat encerrou de forma inesperada.');
+            };
+
+            const inputTexto = document.querySelector('#texto');
+            const botaoEnviar = document.querySelector('#botao');
+
+            if (inputTexto && botaoEnviar) {
+                inputTexto.focus();
+                
+                // Atalho para tecla Enter
+                inputTexto.onkeyup = function(e) {
+                    if (e.keyCode === 13) {
+                        botaoEnviar.click();
+                    }
+                };
+
+                botaoEnviar.onclick = function(e) {
+                    const mensagem = inputTexto.value;
+                    
+                    if (mensagem.trim() !== '') { // Evita enviar mensagens vazias
+                        chatSocket.send(JSON.stringify({
+                            'mensagem': mensagem
+                        }));
+                        inputTexto.value = '';
+                    }
+                };
+            }
+        } else {
+            console.error('Erro: Elemento #nome-sala-data não encontrado.');
+        }
+    </script>
+</body>
+</html>
