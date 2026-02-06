@@ -1,0 +1,103 @@
+<!--<div class="col-sm-6"> 
+    <h3 class="text-primary">Localidades</h3> -->
+    <!-- O container do mapa precisa de uma altura definida para o Leaflet renderizar corretamente 
+    <div id="mapDiv" class="gmap" style="height: 400px; width: 100%; border: 1px solid #ccc; border-radius: 8px;"></div>
+</div> -->
+
+<!-- {% if items.businesses %}
+    
+        Passamos a lista de empresas para um bloco JSON seguro. 
+        Isso evita o uso de {% e {{ dentro do <script>, resolvendo o erro de sintaxe.
+    
+    {{ items.businesses|json_script:"business-data" }}
+{% endif %} -->
+
+<!--<script>
+    /**
+     * Este bloco de código agora é JavaScript puro e será validado sem erros.
+     */
+/*    (function() {
+        // Tentamos localizar o elemento de dados que o Django gerou acima
+        const dataElement = document.getElementById('business-data');
+        const mapContainer = document.getElementById('mapDiv');
+
+        // Verificamos se o elemento existe e contém dados
+        if (dataElement) {
+            // Convertemos o texto JSON de volta para um objeto/lista JavaScript
+            const businesses = JSON.parse(dataElement.textContent);
+
+            if (businesses.length > 0) {
+                // Definimos as coordenadas da primeira empresa como ponto central inicial
+                const latCentral = parseFloat(businesses[0].coordinates.latitude) || 0;
+                const lonCentral = parseFloat(businesses[0].coordinates.longitude) || 0;
+
+                // Inicializamos o objeto do mapa Leaflet apontando para o ID 'mapDiv'
+                const map = L.map('mapDiv').setView([latCentral, lonCentral], 13);
+
+                // Adicionamos a camada de mapa do OpenStreetMap (Tiles)
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors',
+                    maxZoom: 18,
+                }).addTo(map);
+
+                // Iteramos sobre a lista de empresas usando um loop nativo do JavaScript
+                businesses.forEach(function(biz) {
+                    // Extraímos e validamos as coordenadas de cada item
+                    const bLat = parseFloat(biz.coordinates.latitude);
+                    const bLon = parseFloat(biz.coordinates.longitude);
+                    
+                    // Pegamos os textos (Nome, Endereço e a cidade que vem do contexto global do Django)
+                    const bName = biz.name || "Sem Nome";
+                    const bAddr = biz.location && biz.location.display_address ? biz.location.display_address[0] : "";
+                    const bCity = "{{ city|escapejs }}"; // Variáveis simples de string ainda podem ser usadas com escapejs
+
+                    // Se as coordenadas forem números válidos, criamos o marcador
+                    if (!isNaN(bLat) && !isNaN(bLon)) {
+                        L.marker([bLat, bLon])
+                            .addTo(map) // Adiciona ao mapa criado anteriormente
+                            .bindPopup("<b>" + bName + "</b><br/>" + bAddr + "<br/>" + bCity); // Configura o balão de informações
+                    }
+                });
+            } else {
+                exibirErro(mapContainer, "Nenhuma empresa encontrada na lista.");
+            }
+        } else {
+            // Caso o bloco 'business-data' não exista, mostramos a mensagem de fallback
+            exibirErro(mapContainer, "Nenhuma localidade encontrada para exibir no mapa.");
+        }
+
+        // Função auxiliar para mostrar mensagens de aviso no lugar do mapa
+        function exibirErro(container, mensagem) {
+            if (container) {
+                container.style.height = 'auto'; // Ajusta altura para o conteúdo do texto
+                container.innerHTML = "<div class='alert alert-warning'>" + mensagem + "</div>";
+            }
+        }
+    })();
+</script> -->
+
+<div class="col-sm-6">
+    <h3 class="text-primary">Localidades</h3>
+    <div id="mapDiv" class="gmap"></div>
+</div>
+</div>
+<script>
+    var lat = {{ items.businesses.0.coordinates.latitude | safe }};
+    var lon = {{ items.businesses.0.coordinates.longitude | safe }};
+
+    var map = L.map('mapDiv').setView([lat, lon], 13); //0 até 18
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    {% for biz in items.businesses %}
+        var marker = L.marker([{{ biz.coordinates.latitude | safe}}, {{ biz.coordinates.longitude | safe}}]).addTo(map);
+
+        marker.bindPopup("<b>{{ biz.name }}</b><br/>{{ biz.location.display_address.0 }} {{ biz.location.display_address.1 }}<br/>{{ city }}").openPopup();
+    {% endfor %}
+
+
+</script>
+
