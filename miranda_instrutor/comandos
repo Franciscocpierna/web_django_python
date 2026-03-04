@@ -1,0 +1,6 @@
+coverage run --omit='*/venv/*' -m pytest
+coverage run manage.py test
+# só consigo rodar os testes com esses comando abaixo 
+python manage.py test recipes
+python manage.py test recipes.tests.test_recipe_api
+
