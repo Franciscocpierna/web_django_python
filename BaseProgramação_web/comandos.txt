@@ -77,7 +77,7 @@ instalação do django
 pip uninstall django
 pip install django==4.2.*
 
-
+c:/python_projetos/web_django_python/venv/Scripts/Activate.ps1
 c:/python_projetos/web_django_python/projeto1/venv/Scripts/Activate.ps1
 funcionando na linha abaixo
 c:/python_projetos/web_django_python/venv/Scripts/Activate.ps1
